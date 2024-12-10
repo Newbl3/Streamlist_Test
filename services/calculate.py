@@ -8,12 +8,14 @@ def calculate(data, selected_columns):
     :param selected_columns: ユーザーが選択した表示対象のカラム名
     :return: 計算後のデータフレーム
     """
-    # CSVから必要な列のみを抽出し、計算対象として返す
-    # ここでは単純に選択列データをそのまま返しているだけですが、
-    # 計算処理を行いたい場合はこの部分に適切な計算処理を記述します。
-    calc_df = data[["time"] + selected_columns].copy()
-    
-    # 例えば、何らかの処理を加えたい場合は以下のような操作を追加できます
-    # calc_df["adjusted_column"] = calc_df["pelvis_tilt"] * 1.5  # 加工例
+    # 存在する列のみを抽出
+    valid_columns = [col for col in selected_columns if col in data.columns]
 
+    if not valid_columns:
+        return pd.DataFrame()  # 空のDataFrameを返してエラーハンドリング
+
+    # CSVから必要な列のみを抽出し、計算対象として返す
+    calc_df = data[["time"] + valid_columns].copy()
+
+    # ここで計算処理を行いたい場合は記述する
     return calc_df
