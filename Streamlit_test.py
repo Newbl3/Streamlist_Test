@@ -1,14 +1,12 @@
 import pandas as pd
 import streamlit as st
 
-st.title("Hello, Streamlit!")
-st.write("これはとても簡単な Streamlit アプリです！")
-
-# ↓以下を追加
-file_buffer = st.file_uploader("ファイルをアップロードしてください")
+# タイトル
+st.title("売上データの表示")
 
 # Excelファイルの読み込み
-df = pd.read_excel("Data1.xlsx")
+df = pd.read_excel("data.xlsx")
 
 # 表を表示
 st.write("データ", df)
+
