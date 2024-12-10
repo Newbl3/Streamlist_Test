@@ -1,9 +1,3 @@
-# テキスト(マークダウンで書けます。)
-st.write("# title")
-
-# 注釈
-st.caption("注釈")
-
 # テーブル
 import pandas as pd
 df = pd.DataFrame(
@@ -13,6 +7,3 @@ df = pd.DataFrame(
         }
     )
 st.write(df)
-
-# チャート
-st.line_chart(df)
