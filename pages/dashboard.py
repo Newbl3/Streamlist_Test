@@ -7,9 +7,9 @@ from io import StringIO
 import pickle
 
 # モデルとスケーラーの読み込み
-model = pickle.load(open(f'./model/svm_model_rbf_best.pkl', 'rb'))
-scaler = pickle.load(open(f'./model/scaler.pkl', 'rb'))
-imputer = pickle.load(open(f'./model/imputer.pkl', 'rb'))
+#model = pickle.load(open(f'./model/svm_model_rbf_best.pkl', 'rb'))
+#scaler = pickle.load(open(f'./model/scaler.pkl', 'rb'))
+#imputer = pickle.load(open(f'./model/imputer.pkl', 'rb'))
 
 def classify_movement(uploaded_file, model, scaler, imputer):
     # Load new data from uploaded file
