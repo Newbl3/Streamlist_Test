@@ -1,3 +1,5 @@
+import pandas as pd
+import streamlit as st
 # ワイドレイアウト
 st.set_page_config(layout="wide")
 
@@ -5,7 +7,6 @@ st.set_page_config(layout="wide")
 st.write("# title")
 
 # テーブル
-import pandas as pd
 df = pd.DataFrame(
         {
             "first column": [1, 2, 3, 4],
