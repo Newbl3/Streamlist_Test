@@ -5,3 +5,9 @@ st.write("これはとても簡単な Streamlit アプリです！")
 
 # ↓以下を追加
 file_buffer = st.file_uploader("ファイルをアップロードしてください")
+
+# Excelファイルの読み込み
+df = pd.read_excel("data.xlsx")
+
+# 表を表示
+st.write("データ", df)
