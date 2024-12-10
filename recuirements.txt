@@ -6,3 +6,4 @@ matplotlib
 StringIO
 IO
 pickle
+scikit-learn
