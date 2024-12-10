@@ -3,7 +3,7 @@ from services import calculate, file_service
 import os
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+import matplotlib as plt
 import seaborn as sns
 import streamlit as st
 from io import StringIO
