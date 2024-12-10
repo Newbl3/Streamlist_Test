@@ -1,40 +1,24 @@
 import streamlit as st
-import pandas as pd
-from services import file_service, calculate
 
+from services import calculate, file_service
 
 def display():
-    st.header("動作分類")
+    st.header("Upload CSV for Calculation")
 
-    # CSVアップロードのUI
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
-
     if uploaded_file:
-        # アップロードしたデータを読み込む
         data = file_service.read_csv(uploaded_file)
 
-        if data is not None:
-            # ユーザーにデータを確認させるため表示する
-            st.write("アップロードデータのヘッダー:", data.columns)
-            st.write("アップロードデータ:", data.head())
+        #修正前
+        #calc_df = calculate.calculate(data, "sales", "tax")
 
-            # 計算対象のデータを動的に取得して処理
-            selected_columns = st.multiselect(
-                "Select the columns to visualize",
-                options=data.columns[1:],  # 1列目以外を選択肢として表示
-                default=data.columns[1:6]  # デフォルトで最初の5列を選択状態にする
-            )
-
-            # 選択された列が存在するかチェック
-            valid_columns = [col for col in selected_columns if col in data.columns]
-            if not valid_columns:
-                st.error("選択された列がデータに存在していません。")
-            else:
-                # 計算部分に渡して処理
-                calc_df = calculate.calculate(data, valid_columns)
-
-                # 計算結果をチャートで表示
-                st.line_chart(data=calc_df, x="time", y=valid_columns)
-
-        else:
-            st.error("データが正しく読み込めていません。")
+        #修正後
+        calc_df = calculate.calculate(data, "pelvis_tilt", "pelvis_list", "pelvis_rotation", "pelvis_tx", "pelvis_ty", "pelvis_tz",
+                                            "hip_flexion_r", "hip_adduction_r", "hip_rotation_r", "knee_angle_r", "ankle_angle_r",
+                                            "subtalar_angle_r", "mtp_angle_r", "hip_flexion_l", "hip_adduction_l", "hip_rotation_l",
+                                            "knee_angle_l", "ankle_angle_l", "subtalar_angle_l", "mtp_angle_l", "lumbar_extension",
+                                            "lumbar_bending", "lumbar_rotation", "arm_flex_r", "arm_add_r", "arm_rot_r", "elbow_flex_r",
+                                            "pro_sup_r", "arm_flex_l", "arm_add_l", "arm_rot_l", "elbow_flex_l", "pro_sup_l")
+       
+        
+        st.line_chart(data=calc_df, x="date", y="sales_with_tax")
