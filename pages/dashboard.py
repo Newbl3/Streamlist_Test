@@ -12,9 +12,9 @@ dataset_name = st.sidebar.selectbox("select Dataset", ("Iris", "Breast Cancer", 
 classifier_name= st.sidebar.selectbox("select Classifier", ("KNN", "SVM", "RandomForest"))
 
 def get_dataset(dataset_name):
-    if dataset_name =="Iris":
+    if dataset_name == "Iris":
         data = dataset.load_iris()
-    elif dataset_name ="Breast Cancer":
+    elif dataset_name =="Breast Cancer":
         data = datasets.load_breast_cancer()
     else:
         data = datasets.load_wine()
