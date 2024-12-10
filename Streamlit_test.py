@@ -4,9 +4,6 @@ st.write("# title")
 # 注釈
 st.caption("注釈")
 
-# 画像
-st.image("https://ul.h3z.jp/tbfgZLSX.webp")
-
 # テーブル
 import pandas as pd
 df = pd.DataFrame(
