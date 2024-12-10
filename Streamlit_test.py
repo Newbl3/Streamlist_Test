@@ -1,11 +1,21 @@
+# テキスト(マークダウンで書けます。)
+st.write("# title")
+
+# 注釈
+st.caption("注釈")
+
+# 画像
+st.image("https://ul.h3z.jp/tbfgZLSX.webp")
+
+# テーブル
 import pandas as pd
-import streamlit as st
+df = pd.DataFrame(
+        {
+            "first column": [1, 2, 3, 4],
+            "second column": [10, 20, 30, 40],
+        }
+    )
+st.write(df)
 
-# タイトル
-st.title("売上データの表示")
-
-# Excelファイルの読み込み
-df = pd.read_excel("Data1.xlsx")
-
-# 表を表示
-st.write("データ", df)
+# チャート
+st.line_chart(df)
