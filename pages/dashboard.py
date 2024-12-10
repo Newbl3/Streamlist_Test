@@ -9,9 +9,9 @@ from sklearn import svm
 
 # フォルダ階層に基づいてモデルファイルへの絶対パスを取得
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # pagesフォルダの親ディレクトリ
-model_path = os.path.join(base_dir, "model", "svm_model_rbf_best.pkl")
-scaler_path = os.path.join(base_dir, "model", "scaler.pkl")
-imputer_path = os.path.join(base_dir, "model", "imputer.pkl")
+#model_path = os.path.join(base_dir, "model", "svm_model_rbf_best.pkl")
+#scaler_path = os.path.join(base_dir, "model", "scaler.pkl")
+#imputer_path = os.path.join(base_dir, "model", "imputer.pkl")
 
 # モデルとスケーラーの読み込み
 #model = pickle.load(open(model_path, "rb"))
