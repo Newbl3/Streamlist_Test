@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from io import StringIO
 import pickle
-import sklearn
+import scikit-learn
 
 # フォルダ階層に基づいてモデルファイルへの絶対パスを取得
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # pagesフォルダの親ディレクトリ
