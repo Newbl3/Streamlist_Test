@@ -60,6 +60,7 @@ def display():
         st.write("Available columns in calc_df:", calc_df.columns)
 
         # UIでX軸とY軸の選択肢を作成
+        columns_list = calc_df.columns.tolist()
         x_column = st.selectbox("Select X-axis column", options=calc_df.columns)
         y_column = st.selectbox("Select Y-axis column", options=calc_df.columns)
 
