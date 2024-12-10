@@ -14,7 +14,7 @@ model_path = os.path.join(base_dir, "model", "svm_model_rbf_best.pkl")
 #imputer_path = os.path.join(base_dir, "model", "imputer.pkl")
 
 # モデルとスケーラーの読み込み
-#model = pickle.load(open(model_path, "rb"))
+model = pickle.load(open(model_path, "rb"))
 #scaler = pickle.load(open(scaler_path, "rb"))
 #imputer = pickle.load(open(imputer_path, "rb"))
 
