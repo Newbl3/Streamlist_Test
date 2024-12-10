@@ -19,6 +19,7 @@ def display():
                                             "knee_angle_l", "ankle_angle_l", "subtalar_angle_l", "mtp_angle_l", "lumbar_extension",
                                             "lumbar_bending", "lumbar_rotation", "arm_flex_r", "arm_add_r", "arm_rot_r", "elbow_flex_r",
                                             "pro_sup_r", "arm_flex_l", "arm_add_l", "arm_rot_l", "elbow_flex_l", "pro_sup_l")
+        st.write("columns",calc_df.columns)
        
         
         st.line_chart(data=calc_df, x="date", y="sales_with_tax")
