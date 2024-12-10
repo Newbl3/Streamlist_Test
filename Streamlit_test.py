@@ -1,3 +1,9 @@
+# ワイドレイアウト
+st.set_page_config(layout="wide")
+
+# テキスト(マークダウンで書けます。)
+st.write("# title")
+
 # テーブル
 import pandas as pd
 df = pd.DataFrame(
