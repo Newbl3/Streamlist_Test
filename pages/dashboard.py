@@ -5,8 +5,13 @@ import numpy as np
 import pandas as pd
 from io import StringIO
 import pickle
-import sklearn
-#from scikit-learn import svm
+from sklearn import datasets
+#import matplotlib
+
+dataset_name = st.sidebar.selectbox("select Dataset", ("Iris", "Breast Cancer", "Wine dataset"))
+
+classifier_name= st.sidebar.selectbox("select Classifier", ("KNN", "SVM", "RandomForest"))
+
 
 # フォルダ階層に基づいてモデルファイルへの絶対パスを取得
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # pagesフォルダの親ディレクトリ
