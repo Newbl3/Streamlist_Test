@@ -15,7 +15,7 @@ def display():
         #calc_df = calculate.calculate(data, "pelvis", "pelvis_list")
 
         #修正後
-        calc_df = calculate.calculate(
+        calc_df = calculate(
             data, 
             "pelvis_tilt", 
             "pelvis_list", 
