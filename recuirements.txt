@@ -2,6 +2,6 @@ pandas
 streamlit
 os
 numpy
-matplotlib.pyplot
+matplotlib
 StringIO
 IO
