@@ -62,4 +62,4 @@ def classify_uploaded_csv(uploaded_files, model, scaler, imputer):
 
         
     pred = classify_movement_in_folder(training_folder, svm_model, scaler, imputer, labels)
-    st.write("動作分類結果",:pred)
+    st.write("動作分類結果",pred)
