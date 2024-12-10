@@ -10,9 +10,9 @@ def display():
         data = file_service.read_csv(uploaded_file)
 
         #修正前
-        calc_df = calculate.calculate(data, "sales", "tax")
+        #calc_df = calculate.calculate(data, "sales", "tax")
         
-        #calc_df = calculate.calculate(data, "pelvis_tilt", "pelvis_list")
+        calc_df = calculate.calculate(data, "pelvis", "pelvis_list")
 
         #修正後
         #calc_df = calculate.calculate(data, "pelvis_tilt", "pelvis_list", "pelvis_rotation", "pelvis_tx", "pelvis_ty", "pelvis_tz",
