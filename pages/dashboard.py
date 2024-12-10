@@ -26,12 +26,7 @@ def display():
         # グラフプロット
         st.line_chart(data=calc_df, x=x_column, y=y_column)
 
-def classify_uploaded_csv(uploaded_files, model, scaler, imputer):
-    #モデルとスケーラーの読み込み
-    model = pickle.load(open(f'/model/svm_model_rbf_best.pkl', 'rb'))
-    scaler = pickle.load(open(f'/model/scaler.pkl', 'rb'))
-    imputer = pickle.load(open(f'/model/imputer.pkl', 'rb'))
-
+def classify_movement(uploaded_files, model, scaler, imputer):
     # Load new data from uploaded file
     string_data = StringIO(uploaded_file.getvalue().decode("utf-8"))
     new_data = pd.read_csv(string_data)
@@ -60,6 +55,10 @@ def classify_uploaded_csv(uploaded_files, model, scaler, imputer):
         # Display results for the file
         st.write(f"File: {file_name} | True Label: {true_label} | Label Counts: {final_prediction_counts} | Final Prediction: {final_prediction}")
 
-        
-pred = classify_movement_in_folder(training_folder, svm_model, scaler, imputer)
+#モデルとスケーラーの読み込み
+model = pickle.load(open(f'/model/svm_model_rbf_best.pkl', 'rb'))
+scaler = pickle.load(open(f'/model/scaler.pkl', 'rb'))
+imputer = pickle.load(open(f'/model/imputer.pkl', 'rb'))
+      
+pred = classify_movement(uploaded_file, model, scaler, imputer)
 st.write("動作分類結果",pred)
