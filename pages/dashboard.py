@@ -24,4 +24,4 @@ def display():
         st.write("columns",calc_df.columns)
        
         
-        st.line_chart(data=calc_df, x="time", y="sales_with_tax")
+        st.line_chart(data=calc_df, x="time", y="total")
