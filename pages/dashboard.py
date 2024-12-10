@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 from io import StringIO
-
+import pickle
 
 def display():
     st.header("Upload CSV for Calculation")
