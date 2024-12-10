@@ -62,9 +62,9 @@ def classify_movement(uploaded_files, model, scaler, imputer):
         st.write(f"File: {file_name} | True Label: {true_label} | Label Counts: {final_prediction_counts} | Final Prediction: {final_prediction}")
 
 #モデルとスケーラーの読み込み
-model = pickle.load(open(f'../model/svm_model_rbf_best.pkl', 'rb'))
-scaler = pickle.load(open(f'../model/scaler.pkl', 'rb'))
-imputer = pickle.load(open(f'../model/imputer.pkl', 'rb'))
+model = pickle.load(open(f'./model/svm_model_rbf_best.pkl', 'rb'))
+scaler = pickle.load(open(f'./model/scaler.pkl', 'rb'))
+imputer = pickle.load(open(f'./model/imputer.pkl', 'rb'))
       
 pred = classify_movement(uploaded_file, model, scaler, imputer)
 st.write("動作分類結果",pred)
