@@ -4,7 +4,7 @@ from services import file_service, calculate
 
 
 def display():
-    st.header("Upload CSV for Calculation")
+    st.header("動作分類")
 
     # CSVアップロードのUI
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
