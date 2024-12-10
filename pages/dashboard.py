@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from io import StringIO
 import pickle
-from sklearn import svm
+import sklearn
 #from scikit-learn import svm
 
 # フォルダ階層に基づいてモデルファイルへの絶対パスを取得
