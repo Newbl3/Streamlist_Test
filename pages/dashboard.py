@@ -61,5 +61,5 @@ def classify_uploaded_csv(uploaded_files, model, scaler, imputer):
         st.write(f"File: {file_name} | True Label: {true_label} | Label Counts: {final_prediction_counts} | Final Prediction: {final_prediction}")
 
         
-    pred = classify_movement_in_folder(training_folder, svm_model, scaler, imputer, labels)
-    st.write("動作分類結果",pred)
+pred = classify_movement_in_folder(training_folder, svm_model, scaler, imputer)
+st.write("動作分類結果",pred)
