@@ -9,16 +9,14 @@ from sklearn import datasets
 import matplotlib.pyplot as plt
 from sklearn.svm import SVC
 
-# フォルダ階層に基づいてモデルファイルへの絶対パスを取得
+# model読み込み
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # pagesフォルダの親ディレクトリ
 model_path = os.path.join(base_dir, "model", "svm_model_rbf_best.pkl")
-#scaler_path = os.path.join(base_dir, "model", "scaler.pkl")
-#imputer_path = os.path.join(base_dir, "model", "imputer.pkl")
-
-# モデルとスケーラーの読み込み
+scaler_path = os.path.join(base_dir, "model", "scaler.pkl")
+imputer_path = os.path.join(base_dir, "model", "imputer.pkl")
 model = pickle.load(open(model_path, "rb"))
-#scaler = pickle.load(open(scaler_path, "rb"))
-#imputer = pickle.load(open(imputer_path, "rb"))
+scaler = pickle.load(open(scaler_path, "rb"))
+imputer = pickle.load(open(imputer_path, "rb"))
 
 def classify_movement(uploaded_file, model, scaler, imputer):
     # Load new data from uploaded file
