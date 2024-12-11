@@ -16,7 +16,7 @@ def load_model(model_path):
         st.error(f"モデルのロード中にエラーが発生しました: {e}")
         return None
 
-model_path = "svm_model.pkl"
+model_path = "svm_model_rbf_best.pkl"
 model = load_model(model_path)
 
 if model is not None:
