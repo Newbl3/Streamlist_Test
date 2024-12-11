@@ -6,7 +6,15 @@ import pandas as pd
 from io import StringIO
 import pickle
 from sklearn import datasets
-#import matplotlib
+import matplotlib.pyplot as plt
+from sklearn.svm import SVC
+#from sklearn.neighbors import KNeighborsClassifier
+#from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.decomposition import PCA
+
+
 
 dataset_name = st.sidebar.selectbox("select Dataset", ("Iris", "Breast Cancer", "Wine dataset"))
 classifier_name= st.sidebar.selectbox("select Classifier", ("KNN", "SVM", "RandomForest"))
