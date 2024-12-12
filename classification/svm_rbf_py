@@ -1,0 +1,137 @@
+import os
+import re
+import numpy as np
+import pandas as pd
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
+from sklearn import svm
+from sklearn.metrics import accuracy_score, classification_report
+import joblib
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+########################################################################################################
+#
+#　種目名の標準化
+#
+########################################################################################################
+def standardize_label(label):
+    label = label.lower().replace('ik', '').strip()  # '_IK'を削除
+    label = re.sub(r'\d+', '', label)  # 数字を削除
+    label = label.replace('_', '').replace('-', '').strip()  # アンダースコアとハイフンを削除
+    if 'widesquat' in label:
+        label = 'widesquat'
+    elif 'narrowsquat' in label:
+        label = 'narrowsquat'
+    elif 'squat' in label:
+        label = 'normalsquat'
+    elif 'shoulderpress' in label:
+        label = 'shoulderpress'
+    elif 'bentoverrow' in label:
+        label = 'bentoverrow'
+    elif 'sideraise' in label:
+        label = 'sideraise'
+    elif 'deadlift' in label:
+        label = 'deadlift'
+    elif 'narrowdeadlift' in label:
+        label = 'deadlift'
+    elif 'armcurl' in label:
+        label = 'armcurl'
+    elif 'hanmercurl' in label:
+        label = 'humercurl'
+    return label.strip()
+
+########################################################################################################
+#
+#　メイン処理
+#
+########################################################################################################
+
+training_folder = './classification/dataset'  # 学習データフォルダ
+
+# 3. ディレクトリ内のすべてのCSVファイルを読み込み、結合する
+X_raw = pd.DataFrame()
+y_raw = pd.DataFrame()
+
+for filename in os.listdir(training_folder):
+    if filename.endswith('.csv'):
+        file_path = os.path.join(training_folder, filename)
+        X_temp = pd.read_csv(file_path)
+
+        # 最初と最後の60フレームを削除
+        X_temp = X_temp.iloc[60:-60].reset_index(drop=True)
+
+        # ファイル名全体をラベルとして使う
+        base_name = os.path.basename(filename).split('.')[0]
+        label = '_'.join(base_name.split('_')[1:])  # 'Seiya_BentOverRow_IK' から 'BentOverRow' を抽出
+        standardized_label = standardize_label(label)  # ラベルを標準化
+
+        y_temp = pd.DataFrame([standardized_label] * len(X_temp), columns=['Label'])
+
+        # time列がある場合は削除
+        if 'time' in X_temp.columns:
+            X_temp = X_temp.drop(columns=['time'])
+
+        # データを結合
+        X_raw = pd.concat([X_raw, X_temp], axis=0, ignore_index=True)
+        y_raw = pd.concat([y_raw, y_temp], axis=0, ignore_index=True)
+
+# 4. データの整形
+window_size = 30
+n_features = X_raw.shape[1]
+
+# 移動ウィンドウを用いたデータ整形
+X = []
+y = []
+for i in range(0, len(X_raw) - window_size + 1):
+    X.append(X_raw.iloc[i:i + window_size].values.flatten())
+    y.append(y_raw.iloc[i]['Label'])
+
+X = np.array(X)
+y = np.array(y).ravel()
+
+# 5. ラベルの確認（重複していないか）
+print("Unique labels in y:", np.unique(y))
+
+# ラベルのユニーク値を取得して、混同行列のラベルに使用
+labels = np.unique(y)
+
+# 6. 欠損値の補完（平均値で補完）
+imputer = SimpleImputer(strategy='mean')
+X = imputer.fit_transform(X)
+
+# 7. データの前処理（標準化）
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# 8. データを訓練セットとテストセットに分割
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42, stratify=y)
+
+# 最適なパラメータを使用してSVMモデルを定義
+svm_model = svm.SVC(kernel='rbf')
+
+# モデルを学習させる
+svm_model.fit(X_train, y_train)
+
+# 学習したモデルを使ってテストデータで予測
+y_pred = svm_model.predict(X_test)
+
+# モデルの精度を評価
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy: {accuracy}')
+
+# 混同行列の表示
+#cm = confusion_matrix(y_test, y_pred, labels=labels)
+#plt.figure(figsize=(10, 7))\
+#sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
+#plt.title('Confusion Matrix')
+#plt.show()
+
+# 最適なモデルとスケーラー、インピュータを保存
+joblib.dump(svm_model, 'svm_model_rbf_best.pkl')
+joblib.dump(scaler, 'scaler.pkl')
+joblib.dump(imputer, 'imputer.pkl')
+
+print("最適なモデルが保存されました。")
