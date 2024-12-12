@@ -1,10 +1,11 @@
 import streamlit as st
 
-from pages import dashboard
+from pages import classification, prediction
 
 def main():
-    st.title("CSV Data Processing and Graph Display")    
-    dashboard.display()
+    st.title("Motion Classification")    
+    prediction.prediction_display()
+    classification.classification_display()
 
 if __name__ == "__main__":
     main()
